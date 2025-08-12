@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.dist/
+.DS_Store
+
+# Envs
+.venv/
+venv/
+
+# Local config
+.env
+
+# App data (SQLite, indexes)
+app_data/
+backend/app_data/
+
+# Uploads (raw PDFs)
+backend/uploads/pdf/
+
+# Data outputs (converted txt)
+backend/app/data/**/*.txt
+backend/app/data/**/*.pdf
+
+# Node (if any in RN demo)
+node_modules/
+

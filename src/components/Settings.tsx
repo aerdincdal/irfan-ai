@@ -14,7 +14,6 @@ import {
 
 import {
   User,
-  Shield,
   FileText,
   LogOut,
   ExternalLink,
@@ -135,28 +134,6 @@ export const Settings = ({ onBack, onLogout }: SettingsProps) => {
             </TouchableOpacity>
           </View>
 
-          {/* Hukuki */}
-          <View style={styles.panel}>
-            <View style={styles.sectionHeader}>
-              <Shield size={20} color="#F2AE30" />
-              <Text style={styles.sectionTitle}>Hukuki</Text>
-            </View>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("PrivacyPolicy")}
-              style={[styles.outlineButton, Platform.OS === "ios" && { overflow: "hidden" }]}
-            >
-              <Text style={styles.outlineButtonText}>Gizlilik Politikası</Text>
-              <ExternalLink size={16} color="#666" />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => navigation.navigate("TermsOfService")}
-              style={[styles.outlineButton, Platform.OS === "ios" && { overflow: "hidden" }]}
-            >
-              <Text style={styles.outlineButtonText}>Kullanım Şartları</Text>
-              <ExternalLink size={16} color="#666" />
-            </TouchableOpacity>
-          </View>
 
           {/* Tehlikeli Bölge */}
           <View style={[styles.panel, styles.dangerZone]}>
@@ -176,11 +153,6 @@ export const Settings = ({ onBack, onLogout }: SettingsProps) => {
               <LogOut size={16} color="#d9534f" />
               <Text style={[styles.dangerButtonText, { marginLeft: 8 }]}>Çıkış Yap</Text>
             </TouchableOpacity>
-          </View>
-
-          {/* Bilgi */}
-          <View style={styles.dedicationContainer}>
-            <Text style={styles.dedicationText}>irfan, bir Anekron A.Ş uygulamasıdır.</Text>
           </View>
 
           <View style={{ height: 40 }} />
@@ -256,12 +228,6 @@ const styles = StyleSheet.create({
 
   outlineButtonText: { color: "#666", fontSize: 16, fontWeight: "600" },
 
-  infoRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 10 },
-
-  infoLabel: { color: "#666", fontSize: 14 },
-
-  infoValue: { color: "#666", fontSize: 14, fontWeight: "500" },
-
   dangerZone: { borderColor: "#d9534f", borderWidth: 1 },
 
   dangerTitle: { color: "#d9534f" },
@@ -269,21 +235,6 @@ const styles = StyleSheet.create({
   dangerButton: { borderColor: "#d9534f", marginBottom: 12 },
 
   dangerButtonText: { color: "#d9534f", fontWeight: "600", fontSize: 16 },
-
-  dedicationContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 20,
-    marginTop: 20,
-  },
-
-  dedicationText: {
-    fontSize: 11,
-    color: "#555",
-    fontStyle: "italic",
-    textAlign: "center",
-    opacity: 0.7,
-  },
 });
 
 

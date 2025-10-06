@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { supabase } from "../integrations/supabase/client";
 
 import { SplashScreen } from "../components/SplashScreen";
 import { Onboarding } from "../components/Onboarding";
@@ -30,56 +29,43 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const RootNavigator = () => {
-  const [initialRoute, setInitialRoute] = useState<keyof RootStackParamList | null>(null);
+  const [hasOnboarded, setHasOnboarded] = useState<boolean | null>(null);
 
   useEffect(() => {
-    checkInitialRoute();
+    const checkOnboarding = async () => {
+      const value = await AsyncStorage.getItem("hasOnboarded");
+      setHasOnboarded(value === "true");
+    };
+    checkOnboarding();
   }, []);
 
-  const checkInitialRoute = async () => {
-    try {
-      // Onboarding tamamlandı mı kontrol et
-      const hasCompletedOnboarding = await AsyncStorage.getItem("hasCompletedOnboarding");
-      
-      // Kullanıcı giriş yapmış mı kontrol et
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      if (!hasCompletedOnboarding) {
-        // İlk kez açılıyor, onboarding göster
-        setInitialRoute("Splash");
-      } else if (!session) {
-        // Onboarding yapılmış ama giriş yapılmamış
-        setInitialRoute("Auth");
-      } else {
-        // Her şey tamam, direkt Chat'e git
-        setInitialRoute("Chat");
-      }
-    } catch (error) {
-      console.error("Initial route check error:", error);
-      setInitialRoute("Splash");
-    }
-  };
-
-  if (!initialRoute) {
-    // Loading state - boş ekran göster
-    return null;
-  }
-
   return (
-    <Stack.Navigator initialRouteName={initialRoute} screenOptions={{ headerShown: false }}>
+    <Stack.Navigator id={undefined} screenOptions={{ headerShown: false }}>
       <Stack.Screen
         name="Splash"
         children={(props) => (
-          <SplashScreen {...props} onComplete={() => props.navigation.navigate("Onboarding")} />
+          <SplashScreen
+            {...props}
+            onComplete={() => {
+              if (hasOnboarded) {
+                props.navigation.replace("Auth");
+              } else {
+                props.navigation.replace("Onboarding");
+              }
+            }}
+          />
         )}
       />
       <Stack.Screen
         name="Onboarding"
         children={(props) => (
-          <Onboarding {...props} onComplete={async () => {
-            await AsyncStorage.setItem("hasCompletedOnboarding", "true");
-            props.navigation.navigate("Auth");
-          }} />
+          <Onboarding
+            {...props}
+            onComplete={async () => {
+              await AsyncStorage.setItem("hasOnboarded", "true");
+              props.navigation.replace("Auth");
+            }}
+          />
         )}
       />
       <Stack.Screen name="Auth" component={AuthScreen} />
@@ -94,7 +80,6 @@ export const RootNavigator = () => {
             {...props}
             onBack={() => props.navigation.goBack()}
             onLogout={() => props.navigation.navigate("Auth")}
-           
           />
         )}
       />

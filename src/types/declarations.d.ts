@@ -5,7 +5,6 @@ declare module '@env' {
   export const SUPABASE_ANON_KEY: string;
   export const BACKEND_URL: string;
   export const HF_TOKEN: string;
-  export const OPENAI_API_KEY: string;
 }
 
 // Backend API Types

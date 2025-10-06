@@ -43,9 +43,9 @@
       ]
     },
     "ios": {
-      "supportsTablet": false,
+      "supportsTablet": true,
       "bundleIdentifier": "com.irfan.app",
-      "buildNumber": "8",
+      "buildNumber": "1",
       "infoPlist": {
         "CFBundleURLTypes": [
           {
@@ -53,12 +53,21 @@
           }
         ],
         "NSAppTransportSecurity": {
-          "NSAllowsArbitraryLoads": false
+          "NSAllowsArbitraryLoads": true,
+          "NSExceptionDomains": {
+            "localhost": {
+              "NSExceptionAllowsInsecureHTTPLoads": true
+            },
+            "192.168.1.5": {
+              "NSExceptionAllowsInsecureHTTPLoads": true
+            }
+          }
         },
         "UIBackgroundModes": [],
         "NSCameraUsageDescription": "Bu uygulama kamera erişimi gerektirmez.",
         "NSMicrophoneUsageDescription": "Bu uygulama mikrofon erişimi gerektirmez.",
         "NSPhotoLibraryUsageDescription": "Bu uygulama fotoğraf kütüphanesi erişimi gerektirmez.",
+        "NSUserTrackingUsageDescription": "Uygulama deneyiminizi iyileştirmek için anonim kullanım verilerini toplarız.",
         "ITSAppUsesNonExemptEncryption": false
       },
       "usesAppleSignIn": false,

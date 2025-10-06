@@ -1,0 +1,87 @@
+{
+  "expo": {
+    "name": "İrfan",
+    "slug": "irfan",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "icon": "./src/assets/irfan-logo.png",
+    "splash": {
+      "image": "./src/assets/bismillah-calligraphy1.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "scheme": "irfan",
+    "privacy": "unlisted",
+    "description": "İrfan - Kur'an, Hadis ve İslami ilimler hakkında yapay zeka destekli asistan uygulaması. Güvenilir kaynaklardan doğrulanmış bilgilerle İslam'ın güzelliklerini keşfedin.",
+    "primaryColor": "#000000",
+    "backgroundColor": "#000000",
+    "android": {
+      "package": "com.irfan.app",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/adaptive-foreground.png",
+        "backgroundColor": "#000000"
+      },
+      "edgeToEdgeEnabled": true,
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "irfan",
+              "host": "*",
+              "pathPrefix": "/reset-password"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ]
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.irfan.app",
+      "buildNumber": "1",
+      "infoPlist": {
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": ["irfan"]
+          }
+        ],
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true,
+          "NSExceptionDomains": {
+            "localhost": {
+              "NSExceptionAllowsInsecureHTTPLoads": true
+            },
+            "192.168.1.5": {
+              "NSExceptionAllowsInsecureHTTPLoads": true
+            }
+          }
+        },
+        "UIBackgroundModes": [],
+        "NSCameraUsageDescription": "Bu uygulama kamera erişimi gerektirmez.",
+        "NSMicrophoneUsageDescription": "Bu uygulama mikrofon erişimi gerektirmez.",
+        "NSPhotoLibraryUsageDescription": "Bu uygulama fotoğraf kütüphanesi erişimi gerektirmez.",
+        "NSUserTrackingUsageDescription": "Uygulama deneyiminizi iyileştirmek için anonim kullanım verilerini toplarız.",
+        "ITSAppUsesNonExemptEncryption": false
+      },
+      "usesAppleSignIn": false,
+      "associatedDomains": [
+        "applinks:irfan-app.com"
+      ],
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4d1c3156-ac74-4ec8-b7e6-4b6a9740c372"
+      }
+    }
+  }
+}

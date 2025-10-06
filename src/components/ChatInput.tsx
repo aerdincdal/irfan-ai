@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Keyboard,
-} from "react-native";
+import { View, TextInput, TouchableOpacity, StyleSheet, Keyboard } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 interface ChatInputProps {
@@ -15,7 +9,6 @@ interface ChatInputProps {
 
 export const ChatInput = ({ onSendMessage, disabled = false }: ChatInputProps) => {
   const [message, setMessage] = useState("");
-
   const handleSubmit = () => {
     const trimmedMessage = message.trim();
     if (trimmedMessage && !disabled) {
@@ -29,25 +22,26 @@ export const ChatInput = ({ onSendMessage, disabled = false }: ChatInputProps) =
 
   return (
     <View style={styles.container}>
-      <TextInput
-  style={styles.textInput}
-  multiline={false} // <-- burayı false yaptık
-  placeholder="İslami bir konu hakkında soru sorun..."
-  placeholderTextColor="#666"
-  value={message}
-  onChangeText={setMessage}
-  editable={!disabled}
-  returnKeyType="send"
-  onSubmitEditing={handleSubmit}
-  blurOnSubmit={false}
-/>
+      <View style={styles.inputWrapper}>
+        <TextInput
+          style={styles.textInput}
+          multiline
+          placeholder="İslami bir konu hakkında soru sorun..."
+          placeholderTextColor="#666"
+          value={message}
+          onChangeText={setMessage}
+          editable={!disabled}
+          returnKeyType="send"
+          onSubmitEditing={handleSubmit}
+          blurOnSubmit={false}
+          scrollEnabled={true} 
+        />
+      </View>
+
       <TouchableOpacity
         onPress={handleSubmit}
         disabled={isSendDisabled}
-        style={[
-          styles.sendButton,
-          isSendDisabled && styles.sendButtonDisabled,
-        ]}
+        style={[styles.sendButton, isSendDisabled && styles.sendButtonDisabled]}
       >
         <Ionicons name="send" size={24} color="#2e2e2e" />
       </TouchableOpacity>
@@ -60,22 +54,25 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 12,
     borderTopWidth: 1,
-    borderTopColor: "#000",
+    borderTopColor: "#222",
     backgroundColor: "#000",
     alignItems: "flex-end",
   },
-  textInput: {
+  inputWrapper: {
     flex: 1,
-    minHeight: 52,
-    maxHeight: 128,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    backgroundColor: "#000",
+    height: 52, 
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "#999",
+    borderColor: "#444",
+    backgroundColor: "#000",
+  },
+  textInput: {
+    flex: 1,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
     fontSize: 16,
     color: "#ccc",
+    textAlignVertical: "top",
   },
   sendButton: {
     marginLeft: 8,
